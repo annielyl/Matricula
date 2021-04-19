@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Livro;
+use App\Entity\Disciplina;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,12 +15,14 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        $cleanCode = new Livro("Clean Code", 200, 130.40);
-        $ddd = new Livro("Domain Driven Design", 700, 530.40);
-        $livros = [$cleanCode, $ddd];
+        $arqComp = new Disciplina("Arquitetura de Computadores", "Ewerson", 6);
+        $aed = new Disciplina("Algoritmos e estrutura de dados", "Eduardo", 8);
+        $aic = new Disciplina("Atividade de ic", "Emanuel", 4);
+
+        $disciplinas = [$arqComp, $aed,$aic];
 
         return $this->render('home/index.html.twig', [
-            "livros" => $livros
+            "disciplinas" => $disciplinas
         ]);
     }
 }

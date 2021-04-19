@@ -5,12 +5,16 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Livros do clube do livro</title>
+    <title>Disciplinas 2021</title>
     <style>
+    tr td:first-child { text-align: left; }
+
+    body { background-color: #DEB887	;
+        color: white; }
         form, table {
             width: 50%;
             margin: auto;
-            border: 1px solid #ccc;
+            border: 1px solid #DEB887	;
             padding: 50px;
             box-sizing: border-box;
             border-radius: 10px;
@@ -20,7 +24,6 @@
             flex: 1;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
             margin: 10px;
         }
         form > div > label {
@@ -33,45 +36,59 @@
         }
         table {
             margin-top: 15px;
+
         }
-        thead th {
-            background: #333;
+        #submit{
+            background: #D2691E		;
             color: #fff;
         }
+        thead th {
+            background: #D2691E	;
+            color: #fff;
+        }
+        td{
+            background: #D2691E	;
+            color: #fff;
+        }
+        tbody > tr > td{
+            float: center;
+
+        }
     </style>
+
 </head>
 <body>
     <form>
         <div>
-            <label>Nome do livro</label>
+            <label>Nome da Disciplina</label>
             <input type="text" />
         </div>
         <div>
-            <label>Quantidade de páginas</label>
-            <input type="number" />
-        </div>
-        <div>
-            <label>Valor</label>
+            <label>Professor</label>
             <input type="text" />
         </div>
         <div>
-            <input type="submit" value="Cadastrar"/>
+            <label>Creditos</label>
+            <input type="int" />
+        </div>
+        <div>
+            <input id="submit" type="submit" value="Matricular"/>
         </div>
     </form>
     <table>
         <thead>
             <tr>
-                <th>Nome do livro</th>
-                <th>Quantidade de páginas</th>
-                <th>Valor</th>
+                <th>Titulo da disciplina</th>
+                <th>Nome do professor</th>
+                <th>Creditos</th>
             </tr>
         </thead>
         <tbody>
-            {% for livro in livros %}
+            {% for disciplina in disciplinas %}
             <tr>
-                <td>{{ livro.nome }}</td>
-                <td>{{livro.qtdPaginas}}</td>
-                <td>R$ {{livro.valor}}</td>
+                <td>{{ disciplina.nome }}</td>
+                <td>{{disciplina.professor}}</td>
+                <td> {{disciplina.creditos}}</td>
             </tr>
             {% endfor %}
         </tbody>

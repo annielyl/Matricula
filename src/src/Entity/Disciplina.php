@@ -4,23 +4,18 @@
 namespace App\Entity;
 
 
-class Livro
+class Disciplina
 {
     private string $nome;
-    private int $qtdPaginas;
-    private float $valor;
+    private string $professor;
+    private int $creditos;
 
-    /**
-     * Livro constructor.
-     * @param string $nome
-     * @param int $qtdPaginas
-     * @param float $valor
-     */
-    public function __construct(string $nome, int $qtdPaginas, float $valor)
+
+    public function __construct(string $nome, string $professor,int $creditos)
     {
         $this->nome = $nome;
-        $this->qtdPaginas = $qtdPaginas;
-        $this->valor = $valor;
+        $this->professor = $professor;
+        $this->creditos = $creditos;
     }
 
 
@@ -40,36 +35,28 @@ class Livro
         $this->nome = $nome;
     }
 
-    /**
-     * @return int
-     */
-    public function getQtdPaginas(): int
+
+    public function getProfessor(): string
     {
-        return $this->qtdPaginas;
+        return $this->professor;
     }
 
-    /**
-     * @param int $qtdPaginas
-     */
-    public function setQtdPaginas(int $qtdPaginas): void
+
+    public function setProfessor(string $Professor): void
     {
-        $this->qtdPaginas = $qtdPaginas;
+        $this->Professor= $professor;
     }
 
-    /**
-     * @return float
-     */
-    public function getValor(): float
+
+    public function getCreditos(): int
     {
-        return $this->valor;
+        return $this->creditos;
     }
 
-    /**
-     * @param float $valor
-     */
-    public function setValor(float $valor): void
+
+    public function setCreditos(float $creditos): void
     {
-        $this->valor = $valor;
+        $this->creditos = $creditos;
     }
 
 
