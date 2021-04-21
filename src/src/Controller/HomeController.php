@@ -34,6 +34,13 @@ class HomeController extends AbstractController
         $professor=$request->get('professor');
         $creditos=$request->get('creditos');
 
+        if($nome=="" || $professor=="" || $creditos==""){
+
+            $this->addFlash("message","Preencha todos os campos para adicionar");
+            return $this->redirectToRoute("home");
+
+        }
+   
         $disciplina= new Disciplina($nome,$professor,$creditos);
         $disciplinaRepository->save($disciplina);
 
@@ -60,6 +67,14 @@ class HomeController extends AbstractController
         $nome=$request->get('nome');
         $professor=$request->get('professor');
         $creditos=$request->get('creditos');
+
+        if($nome=="" || $professor=="" || $creditos==""){
+
+            $this->addFlash("message","Preencha todos os campos para editar");
+            return $this->redirectToRoute("home");
+
+        }
+    
 
         $disciplina->setNome($nome);
         $disciplina->setProfessor($professor);
