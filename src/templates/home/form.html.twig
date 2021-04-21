@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Disciplinas</title>
+    <style>
+    body { background-color: #DEB887	;
+        color: white; }
+        form, table {
+            width: 50%;
+            margin: auto;
+            border: 1px solid #DEB887;
+            padding: 50px;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        form > div {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: center;
+            margin: 10px;
+        }
+        form > div > label {
+            font-size: 18pt;
+        }
+        form > div > input {
+            margin-top: 15px;
+            font-size: 18pt;
+            padding: 5px 10px;
+        }
+        table {
+            margin-top: 15px;
+        }
+       #submit{
+            background: #D2691E		;
+            color: #fff;
+        }
+        thead th {
+            background: #D2691E	;
+            color: #fff;
+        }
+        td{
+            background: #D2691E	;
+            color: #fff;
+        }
+        tbody > tr > td{
+            float: center;
+
+        }
+    </style>
+</head>
+<body>
+    {% for message in app.flashes('message') %}
+    <h2>
+        {{ message }}
+    </h2>
+    {% endfor %}
+    <form action="{{ path('editar_save', { 'id' : disciplina.id }) }}" method="post">
+        <div>
+            <label>Titulo da disciplina</label>
+            <input type="text" name="nome" value="{{ disciplina.nome }}"/>
+        </div>
+        <div>
+            <label>Nome do professor</label>
+            <input type="text" name="professor" value="{{ disciplina.professor }}"/>
+        </div>
+        <div>
+            <label>Valor</label>
+            <input type="int" name="creditos" value="{{ disciplina.creditos }}"/>
+        </div>
+        <div>
+            <input type="submit" value="Editar"/>
+        </div>
+    </form>
+</body>
+</html>

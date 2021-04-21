@@ -58,18 +58,23 @@
 
 </head>
 <body>
-    <form>
+    {% for message in app.flashes('message') %}
+    <h2>
+        {{message}}
+    </h2>
+    {% endfor %}
+    <form action="/adicionar" method="post">
         <div>
             <label>Nome da Disciplina</label>
-            <input type="text" />
+            <input type="text" name="nome" />
         </div>
         <div>
             <label>Professor</label>
-            <input type="text" />
+            <input type="text" name="professor" />
         </div>
         <div>
             <label>Creditos</label>
-            <input type="int" />
+            <input type="int" name="creditos" />
         </div>
         <div>
             <input id="submit" type="submit" value="Matricular"/>
@@ -89,6 +94,10 @@
                 <td>{{ disciplina.nome }}</td>
                 <td>{{disciplina.professor}}</td>
                 <td> {{disciplina.creditos}}</td>
+                <td>
+                    <a href="{{ path('editar',{'id':disciplina.id})}}">editar</a>
+                    <a class="text-danger" href="{{ path('remover',{'id':disciplina.id}) }}">remover</a>
+                </td>  
             </tr>
             {% endfor %}
         </tbody>
