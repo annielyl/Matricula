@@ -3,6 +3,7 @@
 namespace App\Entity;
 use App\Repository\DisciplinaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
     * @ORM\Entity(repositoryClass=DisciplinaRepository::class)
@@ -19,20 +20,23 @@ class Disciplina
     private int $id;
 
 
-    /** @ORM\Column(type="string", nullable=false) */
+    /**
+     * @ORM\Column(type="string", nullable=false)
+     * @Assert\NotBlank
+     */
+
     private string $nome;
-    /** @ORM\Column(type="string", nullable=false) */
+    /**
+     * @ORM\Column(type="string", nullable=false)
+     * @Assert\NotBlank
+     */
     private string $professor;
-    /** @ORM\Column(type="integer", nullable=false) */
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotBlank
+     */
     private int $creditos;
 
-
-    public function __construct(string $nome, string $professor,int $creditos)
-    {
-        $this->nome = $nome;
-        $this->professor = $professor;
-        $this->creditos = $creditos;
-    }
 
     public function getId(): string
     {

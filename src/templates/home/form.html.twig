@@ -59,22 +59,9 @@
         {{ message }}
     </h2>
     {% endfor %}
-    <form action="{{ path('editar_save', { 'id' : disciplina.id }) }}" method="post">
-        <div>
-            <label>Titulo da disciplina</label>
-            <input type="text" name="nome" value="{{ disciplina.nome }}"/>
-        </div>
-        <div>
-            <label>Nome do professor</label>
-            <input type="text" name="professor" value="{{ disciplina.professor }}"/>
-        </div>
-        <div>
-            <label>Valor</label>
-            <input type="number" name="creditos" value="{{ disciplina.creditos }}"/>
-        </div>
-        <div>
-            <input type="submit" value="Editar"/>
-        </div>
-    </form>
+    {{ form_start(formDisciplina, {'action':path('editar_save',{'id':disciplina.id })})}}
+        {{ form_widget(formDisciplina) }}
+        <input type="submit" value="Editar"/>
+    {{ form_end(formDisciplina) }}
 </body>
 </html>

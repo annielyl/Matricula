@@ -69,23 +69,11 @@
         {{message}}
     </h2>
     {% endfor %}
-    <form action="/adicionar" method="post">
-        <div>
-            <label>Nome da Disciplina</label>
-            <input type="text" name="nome" />
-        </div>
-        <div>
-            <label>Professor</label>
-            <input type="text" name="professor" />
-        </div>
-        <div>
-            <label>Creditos</label>
-            <input type="number" name="creditos" />
-        </div>
-        <div>
-            <input id="submit" type="submit" value="Matricular"/>
-        </div>
-    </form>
+    {{ form_start(formDisciplina,{'action': path('adicionar')}) }}
+        {{ form_errors(formDisciplina) }}
+        {{ form_widget(formDisciplina) }}
+        <input type="submit" value="Matricular"/>
+    {{ form_end(formDisciplina) }}
     <table>
         <thead>
             <tr>

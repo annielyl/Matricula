@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Disciplina;
+use App\Form\DisciplinaType;
 use App\Repository\DisciplinaRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,33 +21,36 @@ class HomeController extends AbstractController
     {
 
         $disciplinas = $disciplinaRepository->findAll();
+        $form= $this->createForm(DisciplinaType::class);
 
         return $this->render('home/index.html.twig', [
-            "disciplinas" => $disciplinas
+            "disciplinas" => $disciplinas,
+            "formDisciplina"=> $form->createView()
         ]);
     }
 
     /**
      *  @Route("/adicionar", name="adicionar")
      */
-    public function adicionar(Request $request, DisciplinaRepository $disciplinaRepository){
-        $nome= $request->get('nome');
-        $professor=$request->get('professor');
-        $creditos=$request->get('creditos');
+    public function adicionar(Request $request, DisciplinaRepository $disciplinaRepository)
+    {
+        $disciplinas = $disciplinaRepository->findAll();
+        $form = $this->createForm(DisciplinaType::class);
+        $form->handleRequest($request);
 
-        if($nome=="" || $professor=="" || $creditos==""){
+        if ($form->isValid()) {
+            $disciplina = $form->getData();
 
-            $this->addFlash("message","Preencha todos os campos para adicionar");
+            $disciplinaRepository->save($disciplina);
+
+            $this->addFlash("message", "Matricula Solicitada");
             return $this->redirectToRoute("home");
-
+        } else {
+            return $this->render("home/index.html.twig", [
+                "disciplinas" => $disciplinas,
+                "formDisciplinas" => $form->createView()
+            ]);
         }
-   
-        $disciplina= new Disciplina($nome,$professor,$creditos);
-        $disciplinaRepository->save($disciplina);
-
-        $this->addFlash("message","Matricula Solicitada");
-        return $this->redirectToRoute("home");
-
     }
 
     /**
@@ -55,8 +59,10 @@ class HomeController extends AbstractController
 
     public function editar(Disciplina $disciplina): Response
     {
+        $form = $this->createForm(DisciplinaType::class,$disciplina);
         return $this->render('home/form.html.twig', [
-            "disciplina"=>$disciplina
+            "disciplina"=>$disciplina,
+            "formDisciplina" => $form->createView()
         ]);
     }
     /**
@@ -64,26 +70,12 @@ class HomeController extends AbstractController
      */
     public function salvarEdicao(Request $request, Disciplina $disciplina,DisciplinaRepository $disciplinaRepository): Response
     {
-        $nome=$request->get('nome');
-        $professor=$request->get('professor');
-        $creditos=$request->get('creditos');
-
-        if($nome=="" || $professor=="" || $creditos==""){
-
-            $this->addFlash("message","Preencha todos os campos para editar");
-            return $this->redirectToRoute("home");
-
-        }
-    
-
-        $disciplina->setNome($nome);
-        $disciplina->setProfessor($professor);
-        $disciplina->setCreditos($creditos);
-
+        $form = $this->createForm(DisciplinaType::class,$disciplina);
+        $form->handleRequest($request);
+        $disciplina = $form->getData();
+        $disciplinaRepository->save($disciplina);
         $this->addFlash("message", "Disciplina editada com sucesso");
-
         return $this->redirectToRoute("home");
-
     }
 
     /**
@@ -93,7 +85,6 @@ class HomeController extends AbstractController
     {
         $disciplinaRepository->remove($disciplina);
         $this->addFlash("message","Disciplina removida");
-       
         return $this->redirectToRoute("home");
     }
 }
