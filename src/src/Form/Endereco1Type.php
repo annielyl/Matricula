@@ -12,12 +12,12 @@ class Endereco1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cep')
-            ->add('rua')
-            ->add('bairro')
-            ->add('cidade')
-            ->add('estado')
-            ->add('numero')
+            ->add('cep',StringType::class)
+            ->add('rua',StringType::class)
+            ->add('bairro',StringType::class)
+            ->add('cidade',StringType::class)
+            ->add('estado',StringType::class)
+            ->add('numero',StringType::class)
         ;
     }
 

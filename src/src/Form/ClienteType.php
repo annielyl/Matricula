@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Cliente;
+use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,8 +14,8 @@ class ClienteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nome')
-            ->add('email')
+            ->add('nome',StringType::class)
+            ->add('email',EmailType::class)
             ->add('endereco',EnderecoType::class)
             ->add('cartao',CartaoType::class)
         ;
