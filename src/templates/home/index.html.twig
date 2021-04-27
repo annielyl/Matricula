@@ -83,14 +83,14 @@
             </tr>
         </thead>
         <tbody>
-            {% for disciplina in disciplinas %}
+            {% for disciplinas in disciplinas %}
             <tr>
-                <td>{{ disciplina.nome }}</td>
-                <td>{{disciplina.professor}}</td>
-                <td> {{disciplina.creditos}}</td>
+                <td>{{ disciplinas.nome }}</td>
+                <td>{{disciplinas.professor}}</td>
+                <td> {{disciplinas.creditos}}</td>
                 <td>
-                    <a href="{{ path('editar',{'id':disciplina.id})}}">editar</a>
-                    <a class="text-danger" href="{{ path('remover',{'id':disciplina.id}) }}">remover</a>
+                    <a href="{{ path('editar',{'id':disciplinas.id})}}">editar</a>
+                    <a class="text-danger" href="{{ path('remover',{'id':disciplinas.id}) }}">remover</a>
                 </td>  
             </tr>
             {% endfor %}

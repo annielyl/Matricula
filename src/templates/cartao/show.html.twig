@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cartao{% endblock %}
+
+{% block body %}
+    <h1>Cartao</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cartao.id }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ cartao.numero }}</td>
+            </tr>
+            <tr>
+                <th>Cvv</th>
+                <td>{{ cartao.cvv }}</td>
+            </tr>
+            <tr>
+                <th>DataValidade</th>
+                <td>{{ cartao.dataValidade ? cartao.dataValidade|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('cartao_index') }}">back to list</a>
+
+    <a href="{{ path('cartao_edit', {'id': cartao.id}) }}">edit</a>
+
+    {{ include('cartao/_delete_form.html.twig') }}
+{% endblock %}

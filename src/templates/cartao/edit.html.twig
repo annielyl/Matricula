@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cartao{% endblock %}
+
+{% block body %}
+    <h1>Edit Cartao</h1>
+
+    {{ include('cartao/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('cartao_index') }}">back to list</a>
+
+    {{ include('cartao/_delete_form.html.twig') }}
+{% endblock %}
