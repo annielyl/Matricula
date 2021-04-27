@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CartaoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=CartaoRepository::class)
@@ -19,15 +21,18 @@ class Cartao
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $numero;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $cvv;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="date")
      */
     private $dataValidade;

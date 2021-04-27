@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProdutoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=ProdutoRepository::class)
@@ -19,11 +21,13 @@ class Produto
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $nome;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank
      */
     private $valor;
 
