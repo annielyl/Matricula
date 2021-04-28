@@ -15,9 +15,9 @@ class ClienteType extends AbstractType
         $builder
             ->add('nome')
             ->add('email')
-            ->add('endereco')
-            ->add('cartao',CartaoType::class)
-            ->add('carrinho',CarrinhoType::class)
+            ->add('endereco',EnderecoType::class)
+            ->add('cartoes')
+            ->add('carrinhos')
         ;
     }
 
