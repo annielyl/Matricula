@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Carrinho{% endblock %}
+
+{% block body %}
+    <h1>Create new Carrinho</h1>
+
+    {{ include('carrinho/_form.html.twig') }}
+
+    <a href="{{ path('carrinho_index') }}">back to list</a>
+{% endblock %}

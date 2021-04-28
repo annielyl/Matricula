@@ -12,9 +12,10 @@ class Cartao1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('numero',StringType::class)
-            ->add('cvv',StringType::class)
-            ->add('dataValidade',DateType::class)
+            ->add('numero')
+            ->add('cvv')
+            ->add('dataValidade')
+            ->add('Cliente')
         ;
     }
 

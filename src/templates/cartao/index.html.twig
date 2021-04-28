@@ -21,7 +21,7 @@
                 <td>{{ cartao.id }}</td>
                 <td>{{ cartao.numero }}</td>
                 <td>{{ cartao.cvv }}</td>
-                <td>{{ cartao.dataValidade ? cartao.dataValidade|date('Y-m-d') : '' }}</td>
+                <td>{{ cartao.dataValidade }}</td>
                 <td>
                     <a href="{{ path('cartao_show', {'id': cartao.id}) }}">show</a>
                     <a href="{{ path('cartao_edit', {'id': cartao.id}) }}">edit</a>

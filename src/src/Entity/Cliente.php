@@ -44,20 +44,25 @@ class Cliente
     private Endereco $endereco;
 
     /**
-     * One Customer has One Cart.
-     * ORM/OneToOne(targetEntity="Cartao", mappedBy="cliente",cascade={"ALL"},nullable=false)
+     * @ORM\OneToMany(targetEntity=Cartao::class, mappedBy="Cliente")
      */
-    private Cartao $cartao;
+    private $cartoes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produto::class, mappedBy="cliente")
+     * @ORM\OneToMany(targetEntity=Carrinho::class, mappedBy="cliente")
      */
-    private $produtos;
+    private $carrinho;
 
     public function __construct()
     {
-        $this->produtos = new ArrayCollection();
+        $this->cartoes = new ArrayCollection();
+        $this->carrinho = new ArrayCollection();
     }
+
+    /**
+     * One Customer has One Cart.
+     * ORM/OneToOne(targetEntity="Cartao", mappedBy="cliente",cascade={"ALL"},nullable=false)
+     */
 
 
     public function getId(): ?int
@@ -131,33 +136,62 @@ class Cliente
     }
 
     /**
-     * @return Collection|Produto[]
+     * @return Collection|Cartao[]
      */
-    public function getProdutos(): Collection
+    public function getCartoes(): Collection
     {
-        return $this->produtos;
+        return $this->cartoes;
     }
 
-    public function addProduto(Produto $produto): self
+    public function addCartao(Cartao $cartao): self
     {
-        if (!$this->produtos->contains($produto)) {
-            $this->produtos[] = $produto;
-            $produto->setCliente($this);
+        if (!$this->cartoes->contains($cartao)) {
+            $this->cartoes[] = $cartao;
+            $cartao->setCliente($this);
         }
 
         return $this;
     }
 
-    public function removeProduto(Produto $produto): self
+    public function removeCartao(Cartao $cartao): self
     {
-        if ($this->produtos->removeElement($produto)) {
+        if ($this->cartoes->removeElement($cartao)) {
             // set the owning side to null (unless already changed)
-            if ($produto->getCliente() === $this) {
-                $produto->setCliente(null);
+            if ($cartao->getCliente() === $this) {
+                $cartao->setCliente(null);
             }
         }
 
         return $this;
     }
 
+    /**
+     * @return Collection|Carrinho[]
+     */
+    public function getCarrinho(): Collection
+    {
+        return $this->carrinho;
+    }
+
+    public function addCarrinho(Carrinho $carrinho): self
+    {
+        if (!$this->carrinho->contains($carrinho)) {
+            $this->carrinho[] = $carrinho;
+            $carrinho->setCliente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCarrinho(Carrinho $carrinho): self
+    {
+        if ($this->carrinho->removeElement($carrinho)) {
+            // set the owning side to null (unless already changed)
+            if ($carrinho->getCliente() === $this) {
+                $carrinho->setCliente(null);
+            }
+        }
+
+        return $this;
+    }
 }

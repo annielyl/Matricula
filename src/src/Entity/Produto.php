@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Repository\ProdutoRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * @ORM\Entity(repositoryClass=ProdutoRepository::class)
@@ -21,21 +19,19 @@ class Produto
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      */
     private $nome;
 
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotBlank
      */
     private $valor;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cliente::class, inversedBy="produtos")
+     * @ORM\ManyToOne(targetEntity=Carrinho::class, inversedBy="produtos")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $cliente;
+    private $carrinho;
 
     public function getId(): ?int
     {
@@ -66,14 +62,14 @@ class Produto
         return $this;
     }
 
-    public function getCliente(): ?Cliente
+    public function getCarrinho(): ?Carrinho
     {
-        return $this->cliente;
+        return $this->carrinho;
     }
 
-    public function setCliente(?Cliente $cliente): self
+    public function setCarrinho(?Carrinho $carrinho): self
     {
-        $this->cliente = $cliente;
+        $this->carrinho = $carrinho;
 
         return $this;
     }

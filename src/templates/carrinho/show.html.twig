@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carrinho{% endblock %}
+
+{% block body %}
+    <h1>Carrinho</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ carrinho.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('carrinho_index') }}">back to list</a>
+
+    <a href="{{ path('carrinho_edit', {'id': carrinho.id}) }}">edit</a>
+
+    {{ include('carrinho/_delete_form.html.twig') }}
+{% endblock %}

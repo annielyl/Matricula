@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carrinho index{% endblock %}
+
+{% block body %}
+    <h1>Carrinho index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for carrinho in carrinhos %}
+            <tr>
+                <td>{{ carrinho.id }}</td>
+                <td>
+                    <a href="{{ path('carrinho_show', {'id': carrinho.id}) }}">show</a>
+                    <a href="{{ path('carrinho_edit', {'id': carrinho.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('carrinho_new') }}">Create new</a>
+{% endblock %}

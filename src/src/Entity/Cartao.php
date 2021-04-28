@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Repository\CartaoRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * @ORM\Entity(repositoryClass=CartaoRepository::class)
@@ -21,27 +19,23 @@ class Cartao
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      */
     private $numero;
 
     /**
-     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $cvv;
 
     /**
-     * @Assert\NotBlank
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
     private $dataValidade;
 
     /**
-     * One Customer has One Cart.
-     * ORM/OneToOne(targetEntity="Cliente", mappedBy="cartao",cascade={"ALL"})
+     * @ORM\ManyToOne(targetEntity=Cliente::class, inversedBy="cartaos")
      */
-    private Cliente $cliente;
+    private $Cliente;
 
     public function getId(): ?int
     {
@@ -72,31 +66,30 @@ class Cartao
         return $this;
     }
 
-    public function getDataValidade(): ?\DateTimeInterface
+    public function getDataValidade(): ?string
     {
         return $this->dataValidade;
     }
 
-    public function setDataValidade(\DateTimeInterface $dataValidade): self
+    public function setDataValidade(string $dataValidade): self
     {
         $this->dataValidade = $dataValidade;
 
         return $this;
     }
 
-    /**
-     * @return Cliente
-     */
-    public function getCliente(): Cliente
+    public function getCliente(): ?Cliente
     {
-        return $this->cliente;
+        return $this->Cliente;
     }
 
-    /**
-     * @param Cliente $cliente
-     */
-    public function setCliente(Cliente $cliente): void
+    public function setCliente(?Cliente $Cliente): self
     {
-        $this->cliente = $cliente;
+        $this->Cliente = $Cliente;
+
+        return $this;
+    }
+    public function __toString(){
+        return $this->numero;
     }
 }
