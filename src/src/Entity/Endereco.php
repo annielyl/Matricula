@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Repository\EnderecoRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * @ORM\Entity(repositoryClass=EnderecoRepository::class)
@@ -20,7 +18,6 @@ class Endereco
     private $id;
 
     /**
-     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $cep;
@@ -28,37 +25,32 @@ class Endereco
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $rua;
+    private $logradouro;
 
     /**
-     * @Assert\NotBlank
-     * @ORM\Column(type="string", length=255)
-     */
-    private $bairro;
-
-    /**
-     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $cidade;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      */
     private $estado;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      */
     private $numero;
 
     /**
-     * One Customer has One Cart.
-     * ORM/OneToOne(targetEntity="Cliente", mappedBy="endereco")
+     * @ORM\Column(type="string", length=255)
      */
-    private Cliente $cliente;
+    private $bairro;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Cliente::class, cascade={"persist", "remove"})
+     */
+    private $cliente;
 
     public function getId(): ?int
     {
@@ -77,26 +69,14 @@ class Endereco
         return $this;
     }
 
-    public function getRua(): ?string
+    public function getLogradouro(): ?string
     {
-        return $this->rua;
+        return $this->logradouro;
     }
 
-    public function setRua(string $rua): self
+    public function setLogradouro(string $logradouro): self
     {
-        $this->rua = $rua;
-
-        return $this;
-    }
-
-    public function getBairro(): ?string
-    {
-        return $this->bairro;
-    }
-
-    public function setBairro(string $bairro): self
-    {
-        $this->bairro = $bairro;
+        $this->logradouro = $logradouro;
 
         return $this;
     }
@@ -137,19 +117,27 @@ class Endereco
         return $this;
     }
 
-    /**
-     * @return Cliente
-     */
-    public function getCliente(): Cliente
+    public function getBairro(): ?string
+    {
+        return $this->bairro;
+    }
+
+    public function setBairro(string $bairro): self
+    {
+        $this->bairro = $bairro;
+
+        return $this;
+    }
+
+    public function getCliente(): ?Cliente
     {
         return $this->cliente;
     }
 
-    /**
-     * @param Cliente $cliente
-     */
-    public function setCliente(Cliente $cliente): void
+    public function setCliente(?Cliente $cliente): self
     {
         $this->cliente = $cliente;
+
+        return $this;
     }
 }

@@ -49,20 +49,16 @@ class Cliente
     private $cartoes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Carrinho::class, mappedBy="cliente")
+     * @ORM\OneToMany(targetEntity=Carrinho::class, mappedBy="Cliente")
      */
-    private $carrinho;
+    private $carrinhos;
+
 
     public function __construct()
     {
         $this->cartoes = new ArrayCollection();
-        $this->carrinho = new ArrayCollection();
+        $this->carrinhos = new ArrayCollection();
     }
-
-    /**
-     * One Customer has One Cart.
-     * ORM/OneToOne(targetEntity="Cartao", mappedBy="cliente",cascade={"ALL"})
-     */
 
 
     public function getId(): ?int
@@ -111,23 +107,6 @@ class Cliente
         $endereco->setCliente($this);
     }
 
-    /**
-     * @return Cartao
-     */
-    public function getCartao(): Cartao
-    {
-        return $this->cartao;
-    }
-
-    /**
-     * @param Cartao $cartao
-     */
-    public function setCartao(Cartao $cartao): void
-    {
-        $this->cartao = $cartao;
-        $cartao->setCliente($this);
-
-    }
 
     /**
      * @return Collection|Cartao[]
@@ -159,18 +138,22 @@ class Cliente
         return $this;
     }
 
+    public function __toString(){
+        return $this->nome;
+    }
+
     /**
      * @return Collection|Carrinho[]
      */
-    public function getCarrinho(): Collection
+    public function getCarrinhos(): Collection
     {
-        return $this->carrinho;
+        return $this->carrinhos;
     }
 
     public function addCarrinho(Carrinho $carrinho): self
     {
-        if (!$this->carrinho->contains($carrinho)) {
-            $this->carrinho[] = $carrinho;
+        if (!$this->carrinhos->contains($carrinho)) {
+            $this->carrinhos[] = $carrinho;
             $carrinho->setCliente($this);
         }
 
@@ -179,7 +162,7 @@ class Cliente
 
     public function removeCarrinho(Carrinho $carrinho): self
     {
-        if ($this->carrinho->removeElement($carrinho)) {
+        if ($this->carrinhos->removeElement($carrinho)) {
             // set the owning side to null (unless already changed)
             if ($carrinho->getCliente() === $this) {
                 $carrinho->setCliente(null);
@@ -188,7 +171,5 @@ class Cliente
 
         return $this;
     }
-    public function __toString(){
-        return $this->nome;
-    }
+
 }

@@ -15,7 +15,7 @@ class Cartao1Type extends AbstractType
             ->add('numero')
             ->add('cvv')
             ->add('dataValidade')
-            ->add('Cliente')
+            ->add('cliente')
         ;
     }
 

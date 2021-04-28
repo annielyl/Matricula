@@ -10,11 +10,11 @@
             <tr>
                 <th>Id</th>
                 <th>Cep</th>
-                <th>Rua</th>
-                <th>Bairro</th>
+                <th>Logradouro</th>
                 <th>Cidade</th>
                 <th>Estado</th>
                 <th>Numero</th>
+                <th>Bairro</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,11 +23,11 @@
             <tr>
                 <td>{{ endereco.id }}</td>
                 <td>{{ endereco.cep }}</td>
-                <td>{{ endereco.rua }}</td>
-                <td>{{ endereco.bairro }}</td>
+                <td>{{ endereco.logradouro }}</td>
                 <td>{{ endereco.cidade }}</td>
                 <td>{{ endereco.estado }}</td>
                 <td>{{ endereco.numero }}</td>
+                <td>{{ endereco.bairro }}</td>
                 <td>
                     <a href="{{ path('endereco_show', {'id': endereco.id}) }}">show</a>
                     <a href="{{ path('endereco_edit', {'id': endereco.id}) }}">edit</a>

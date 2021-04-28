@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Carrinho;
-use App\Form\CarrinhoType;
+use App\Form\Carrinho1Type;
 use App\Repository\CarrinhoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class CarrinhoController extends AbstractController
     public function new(Request $request): Response
     {
         $carrinho = new Carrinho();
-        $form = $this->createForm(CarrinhoType::class, $carrinho);
+        $form = $this->createForm(Carrinho1Type::class, $carrinho);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +53,7 @@ class CarrinhoController extends AbstractController
     #[Route('/{id}/edit', name: 'carrinho_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Carrinho $carrinho): Response
     {
-        $form = $this->createForm(CarrinhoType::class, $carrinho);
+        $form = $this->createForm(Carrinho1Type::class, $carrinho);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

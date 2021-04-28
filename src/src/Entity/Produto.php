@@ -29,19 +29,22 @@ class Produto
      */
     private $valor;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Carrinho::class, inversedBy="produtos")
-     */
-    private $carrinho;
 
     /**
      * @ORM\ManyToMany(targetEntity=Categoria::class, mappedBy="produtos")
      */
     private $categorias;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Carrinho::class, inversedBy="produtos")
+     */
+    private $carrinho;
+
+
     public function __construct()
     {
         $this->categorias = new ArrayCollection();
+        $this->carrinho = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,17 +76,6 @@ class Produto
         return $this;
     }
 
-    public function getCarrinho(): ?Carrinho
-    {
-        return $this->carrinho;
-    }
-
-    public function setCarrinho(?Carrinho $carrinho): self
-    {
-        $this->carrinho = $carrinho;
-
-        return $this;
-    }
     public function __toString(){
         return $this->nome;
     }
@@ -114,4 +106,30 @@ class Produto
 
         return $this;
     }
+
+    /**
+     * @return Collection|Carrinho[]
+     */
+    public function getCarrinho(): Collection
+    {
+        return $this->carrinho;
+    }
+
+    public function addCarrinho(Carrinho $carrinho): self
+    {
+        if (!$this->carrinho->contains($carrinho)) {
+            $this->carrinho[] = $carrinho;
+        }
+
+        return $this;
+    }
+
+    public function removeCarrinho(Carrinho $carrinho): self
+    {
+        $this->carrinho->removeElement($carrinho);
+
+        return $this;
+    }
+
+
 }

@@ -33,7 +33,7 @@ class Cartao
     private $dataValidade;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cliente::class, inversedBy="cartaos")
+     * @ORM\ManyToOne(targetEntity=Cliente::class, inversedBy="Cartao")
      */
     private $Cliente;
 

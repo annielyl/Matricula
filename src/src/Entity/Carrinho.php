@@ -20,19 +20,19 @@ class Carrinho
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produto::class, mappedBy="carrinho")
+     * @ORM\Column(type="string", length=255)
      */
-    private Produto $produtos;
+    private $descricao;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cliente::class, inversedBy="carrinho")
+     * @ORM\ManyToOne(targetEntity=Cliente::class, inversedBy="carrinhos")
      */
     private $cliente;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToMany(targetEntity=Produto::class, mappedBy="carrinho")
      */
-    private $descricao;
+    private $produtos;
 
     public function __construct()
     {
@@ -44,32 +44,14 @@ class Carrinho
         return $this->id;
     }
 
-    /**
-     * @return Collection|Produto[]
-     */
-    public function getProdutos(): Collection
+    public function getDescricao(): ?string
     {
-        return $this->produtos;
+        return $this->descricao;
     }
 
-    public function addProduto(Produto $produto): self
+    public function setDescricao(string $descricao): self
     {
-        if (!$this->produtos->contains($produto)) {
-            $this->produtos[] = $produto;
-            $produto->setCarrinho($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduto(Produto $produto): self
-    {
-        if ($this->produtos->removeElement($produto)) {
-            // set the owning side to null (unless already changed)
-            if ($produto->getCarrinho() === $this) {
-                $produto->setCarrinho(null);
-            }
-        }
+        $this->descricao = $descricao;
 
         return $this;
     }
@@ -86,16 +68,35 @@ class Carrinho
         return $this;
     }
 
-    public function getDescricao(): ?string
+    /**
+     * @return Collection|Produto[]
+     */
+    public function getProdutos(): Collection
     {
-        return $this->descricao;
+        return $this->produtos;
     }
 
-    public function setDescricao(string $descricao): self
+    public function addProduto(Produto $produto): self
     {
-        $this->descricao = $descricao;
+        if (!$this->produtos->contains($produto)) {
+            $this->produtos[] = $produto;
+            $produto->addCarrinho($this);
+        }
 
         return $this;
     }
-    
+
+    public function removeProduto(Produto $produto): self
+    {
+        if ($this->produtos->removeElement($produto)) {
+            $produto->removeCarrinho($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->descricao;
+    }
 }

@@ -13,7 +13,8 @@ class CarrinhoType extends AbstractType
     {
         $builder
             ->add('descricao')
-            ->add('produto')
+            ->add('cliente')
+            ->add('Produto')
         ;
     }
 

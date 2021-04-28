@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Endereco;
-use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,12 +12,13 @@ class EnderecoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cep',StringType::class)
-            ->add('rua',StringType::class)
-            ->add('bairro',StringType::class)
-            ->add('cidade',StringType::class)
-            ->add('estado',StringType::class)
-            ->add('numero',StringType::class)
+            ->add('cep')
+            ->add('logradouro')
+            ->add('cidade')
+            ->add('estado')
+            ->add('numero')
+            ->add('bairro')
+            ->add('cliente')
         ;
     }
 
