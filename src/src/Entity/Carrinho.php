@@ -22,11 +22,10 @@ class Carrinho
     /**
      * @ORM\OneToMany(targetEntity=Produto::class, mappedBy="carrinho")
      */
-    private $produtos;
+    private Produto $produtos;
 
     /**
      * @ORM\ManyToOne(targetEntity=Cliente::class, inversedBy="carrinho")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $cliente;
 
@@ -98,4 +97,5 @@ class Carrinho
 
         return $this;
     }
+    
 }

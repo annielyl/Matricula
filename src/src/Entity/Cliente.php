@@ -61,7 +61,7 @@ class Cliente
 
     /**
      * One Customer has One Cart.
-     * ORM/OneToOne(targetEntity="Cartao", mappedBy="cliente",cascade={"ALL"},nullable=false)
+     * ORM/OneToOne(targetEntity="Cartao", mappedBy="cliente",cascade={"ALL"})
      */
 
 
@@ -109,12 +109,6 @@ class Cliente
     {
         $this->endereco = $endereco;
         $endereco->setCliente($this);
-    }
-
-
-    public function  __toString()
-    {
-        return $this->nome;
     }
 
     /**
@@ -193,5 +187,8 @@ class Cliente
         }
 
         return $this;
+    }
+    public function __toString(){
+        return $this->nome;
     }
 }

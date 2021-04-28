@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\DBAL\Types\StringType;
 use App\Entity\Cliente;
 use App\Form\ClienteType;
 use App\Repository\ClienteRepository;

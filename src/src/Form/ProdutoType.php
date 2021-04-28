@@ -14,7 +14,6 @@ class ProdutoType extends AbstractType
         $builder
             ->add('nome')
             ->add('valor')
-            ->add('carrinho')
         ;
     }
 

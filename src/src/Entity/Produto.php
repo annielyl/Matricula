@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProdutoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,9 +31,18 @@ class Produto
 
     /**
      * @ORM\ManyToOne(targetEntity=Carrinho::class, inversedBy="produtos")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $carrinho;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Categoria::class, mappedBy="produtos")
+     */
+    private $categorias;
+
+    public function __construct()
+    {
+        $this->categorias = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,6 +81,36 @@ class Produto
     public function setCarrinho(?Carrinho $carrinho): self
     {
         $this->carrinho = $carrinho;
+
+        return $this;
+    }
+    public function __toString(){
+        return $this->nome;
+    }
+
+    /**
+     * @return Collection|Categoria[]
+     */
+    public function getCategorias(): Collection
+    {
+        return $this->categorias;
+    }
+
+    public function addCategoria(Categoria $categoria): self
+    {
+        if (!$this->categorias->contains($categoria)) {
+            $this->categorias[] = $categoria;
+            $categoria->addProduto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategoria(Categoria $categoria): self
+    {
+        if ($this->categorias->removeElement($categoria)) {
+            $categoria->removeProduto($this);
+        }
 
         return $this;
     }
