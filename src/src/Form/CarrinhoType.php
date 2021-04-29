@@ -14,7 +14,7 @@ class CarrinhoType extends AbstractType
         $builder
             ->add('descricao')
             ->add('cliente')
-            ->add('Produto')
+            ->add('produtos')
         ;
     }
 
